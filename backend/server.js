@@ -2,27 +2,28 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import { connectDB } from "./db.js";
-import productRoutes from "./product.routes.js"
+import productRoutes from "./product.routes.js";
+
+dotenv.config();
+connectDB(); // <- Important!
 
 const app = express();
 
-// Use cors middleware
+// CORS setup
 app.use(cors({
   origin: 'http://localhost:3000',
   credentials: true
 }));
-// server.js or app.js
+
+// Built-in middleware
+app.use(express.json());
+
+// Test homepage
 app.get('/', (req, res) => {
   res.send('Welcome to the Homepage!');
 });
 
-dotenv.config();
-const PORT = process.env.PORT || 5000;
-
-app.use(express.json());
+// API routes
 app.use("/api/products", productRoutes);
 
-app.listen(PORT, () => {
-  connectDB();
-  console.log("Server started on http://localhost:" + PORT);
-});
+export default app;
