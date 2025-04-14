@@ -8,7 +8,7 @@ const app = express();
 
 // Use cors middleware
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: 'https://alaiy-dev-fe-429e.vercel.app',
   credentials: true
 }));
 // server.js or app.js
